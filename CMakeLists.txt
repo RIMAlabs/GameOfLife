@@ -3,4 +3,6 @@ project(GameOfLife)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_library(GameOfLife STATIC GameOfLife.cpp)
+add_library(GameOfLife STATIC GameOfLife.cpp
+        Game.cpp
+        Matrix.cpp)
