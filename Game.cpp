@@ -3,6 +3,10 @@
 bool** Game::cells = nullptr;
 Matrix* Game::matrix = nullptr;
 
+/**
+ * @brief Constructs a Game object with a given matrix.
+ * @param mat Pointer to the Matrix object.
+ */
 Game::Game(Matrix* mat) {
     matrix = mat;
     cells = matrix->getCells();
@@ -14,6 +18,9 @@ Game::Game(Matrix* mat) {
     }
 }
 
+/**
+ * @brief Updates the game state to the next generation.
+ */
 void Game::updateGame() {
     for (int i = 0; i < width; i++) {
         for (int j = 0; j < height; j++) {
@@ -29,7 +36,13 @@ void Game::updateGame() {
     matrix->setCells(cells);
 }
 
-int Game::countAliveNeighbors(int x, int yPosition) {
+/**
+ * @brief Counts the number of alive neighbors for a cell.
+ * @param x X-coordinate of the cell.
+ * @param y Y-coordinate of the cell.
+ * @return Number of alive neighbors.
+ */
+int Game::countAliveNeighbors(int x, int y) {
     int alive = 0;
     int offsets[] = {-1, 0, 1};
 
@@ -37,7 +50,7 @@ int Game::countAliveNeighbors(int x, int yPosition) {
         for (int dy : offsets) {
             if (dx == 0 && dy == 0) continue;
             int xNeighbor = (x + dx + width) % width;
-            int yNeighbor = (yPosition + dy + height) % height;
+            int yNeighbor = (y + dy + height) % height;
             if (cells[xNeighbor][yNeighbor]) alive++;
         }
     }
